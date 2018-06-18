@@ -4,11 +4,17 @@ var item, abusive_list; // jSON returned from server. Making it public for highl
 var stranger_list = [];
 
 function get_score(username, callback) {
-      callback(request.responseText); // Another callback here
-    }
-  };
-  request.open('GET', url);
-  request.send();
+    var url = "https://pumpkin-shortcake-65417.herokuapp.com/tpi?user="+username+"&numberTwit=200";
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function()
+    {
+        if (request.readyState == 4 && request.status == 200)
+        {
+            callback(request.responseText); // Another callback here
+        }
+    };
+    request.open('GET', url);
+    request.send();
 }
 
 window.onscroll = function(ev) {
@@ -88,7 +94,8 @@ chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     let userId = findUserId(document);
     console.log(userId)
-    if (userId) {}
+    if (userId) {
+    }
     return true;
   });
 
@@ -105,7 +112,6 @@ function checkForJS_Finish() {
       // changeTweet();
       // changeToReport();
     }
-  if (document.querySelector(".NotificationsHeadingContent")) {
     if (document.querySelector(".NotificationsHeadingContent")) {
       checkNotifUserId(document);
   }
